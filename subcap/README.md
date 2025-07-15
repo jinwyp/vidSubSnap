@@ -4,11 +4,10 @@
 
 ## 功能特性
 
-- 自动解析 SRT 字幕文件
 - 根据字幕时间轴截取视频帧
 - 每个字幕切换时间点截图一张
 - 支持自定义输出目录和文件名
-- 自动处理时间格式转换
+- 把所有截图生成幻灯片
 
 ## 安装依赖
 
@@ -24,33 +23,21 @@ npm install fluent-ffmpeg fs-extra
 
 ```javascript
 const config = {
-    videoPath: './video.mp4',      // 视频文件路径
-    srtPath: './subtitles.srt',    // SRT字幕文件路径
-    outputDir: './screenshots'     // 输出目录
+    videoPath: './video_source/video.mp4',      // 视频文件路径
+    srtPath: './video_source/subtitles.srt',    // SRT字幕文件路径
+    outputDir: './output_screenshots',    // 输出目录
+    slideshowVideo: './output_screenshots/slideshow.mp4', // 幻灯片视频输出路径
 };
 ```
+
+
 
 ### 2. 运行程序
 
 ```bash
-node main.js
+npm start
 ```
 
-### 3. 文件结构
-
-确保你的文件结构如下：
-
-```
-subcap/
-├── main.js                 # 主程序
-├── package.json           # 项目配置
-├── video.mp4              # 视频文件
-├── subtitles.srt          # SRT字幕文件
-└── screenshots/           # 截图输出目录（自动创建）
-    ├── frame_0001.jpg
-    ├── frame_0002.jpg
-    └── ...
-```
 
 ## SRT 字幕格式
 
@@ -71,21 +58,4 @@ SRT 文件应该遵循标准格式：
 1. 需要预先安装 FFmpeg 并确保可以在命令行中访问
 2. 视频文件和字幕文件必须存在
 3. 程序会在每个字幕的开始时间点截图
-4. 截图分辨率默认为 1280x720，可在代码中修改
-5. 输出的图片格式为 JPG
 
-## 错误处理
-
-程序包含完整的错误处理机制：
-- 文件不存在检查
-- SRT 解析错误处理
-- FFmpeg 截图失败处理
-- 自动跳过失败的截图继续处理
-
-## 扩展功能
-
-你可以根据需要扩展以下功能：
-- 支持其他字幕格式（如 ASS、VTT）
-- 自定义截图分辨率
-- 批量处理多个视频文件
-- 添加字幕文本到截图中
